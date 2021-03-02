@@ -1,0 +1,1 @@
+https://commons.wikimedia.org/wiki/File:Vertical-wavy-line-test.svg
