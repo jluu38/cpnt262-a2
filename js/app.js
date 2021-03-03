@@ -156,6 +156,7 @@ const modalPopup = document.querySelector('.image-modal-popup');
 
 // loops over each modal content img and adds click event functionality
 modalImages.forEach(img => {
+  
   img.addEventListener('click', e => {
 
     body.style.overflow = 'auto';
