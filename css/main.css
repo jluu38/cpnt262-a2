@@ -149,6 +149,18 @@ h2 {
 }
 
 
+/* .modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  padding-top: 100px;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+} */
+
+
 .grid {
   --preferred-value: ((var(--max-card-width) * var(--cols) - var(--gap) * 2) - 100%) * 999;
   --gap: 20px;
@@ -163,6 +175,35 @@ h2 {
 
   justify-items: center;
   align-items: baseline;
+}
+
+/* modal content styles */
+.modal-content-wrapper {
+  display: flex;
+  margin: auto;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 70px 0;
+}
+.modal-content-wrapper .image-modal-content {
+  flex: 0 0 30%;
+  cursor: pointer;
+  transition: 300ms ease-out;
+  margin-right: 20px;
+  margin-bottom: 40px;
+}
+
+.image-modal-popup {
+  position: fixed;
+  overflow: auto;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  animation: 500ms fadeIn;
+  display: none;
 }
 
 .item {
@@ -241,6 +282,9 @@ footer {
   /* border: 1px solid transparent; */
   border-radius: 60%;
 }
+
+
+
 
 /* MEDIA QUERIES */
 /*  Hamburger Menu */

@@ -101,36 +101,87 @@ const images = [{
   }
 ];
 
-const gallery = document.querySelector(".grid");
+// all images inside the image modal content class
+
 
 for (let i = 0; i < images.length; i++) {
   //constants declared in the order they're nested 
+  const gallery = document.querySelector(".grid");
   const figure = document.createElement("figure");
-  const imgLink = document.createElement("a");
   const img = document.createElement("img");
+  const imgLink = document.createElement("a");
   const title = document.createElement("h3");
   const imgCreditURL = document.createElement("a");
   const imgCredit = document.createElement("p");
   const figCaption = document.createElement("figcaption");
 
-  imgLink.href = `${images[i].imgURL}`;
+  const modal = document.getElementsByClassName("modal");
+  const modalImg = document.querySelector(".modalImg");
+
   img.src = `${images[i].localURL}`;
+  img.alt = `${images[i].title}` + " Poster";
   img.width = "300";
 
+
+
+
+  imgLink.href = `${images[i].imgURL}`;
   title.innerText = `${images[i].title}`;
 
   imgCreditURL.href = `${images[i].imgCreditUrl}`;
-  imgCreditURL.classList.add("creditURL");
   imgCredit.innerText = `${images[i].imgCredit}`
+  imgCreditURL.classList.add("creditURL");
 
   figCaption.innerText = `${images[i].summary}`;
 
   //appended in nested order 
   gallery.appendChild(figure);
+  figure.appendChild(img);
   figure.appendChild(imgLink);
-  imgLink.appendChild(img);
-  figure.appendChild(title);
   figure.appendChild(imgCreditURL);
   imgCreditURL.appendChild(imgCredit);
+  imgLink.appendChild(title);
   figure.appendChild(figCaption);
+
+  // images[i].onclick = function () {
+  //   modal.style.display = "block";
+  //   modalImg.src = img.src;
+  // };
+
+  // function modalImg(images) {
+  //   const expandImg = document.querySelector(".expandImg");
+  //   expandImg.src = images.src;
+  //   expandImg.parentElement.style.display = "block";
+  // }
+
+  const lightboxImages = document.querySelectorAll('.modal-content img');
+
+// dynamically selects all elements inside modal popup
+const modalElement = element =>
+  document.querySelector(`.image-modal-popup ${element}`);
+
+const body = document.querySelector('body');
+
+// closes modal on clicking anywhere and adds overflow back
+document.addEventListener('click', () => {
+  body.style.overflow = 'auto';
+  modalPopup.style.display = 'none';
+});
+
+const modalPopup = document.querySelector('.image-modal-popup');
+
+// loops over each modal content img and adds click event functionality
+lightboxImages.forEach(img => {
+  img.addEventListener('click', e => {
+    // let img = document.querySelectorAll("img");
+    // img.src = `${images[i].localURL}`;
+    body.style.overflow = 'auto';
+    e.stopPropagation();
+    modalPopup.style.display = 'block';
+    modalElement('img').src = img.src;
+  });
+});
 }
+
+
+
