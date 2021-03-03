@@ -115,8 +115,8 @@ for (let i = 0; i < images.length; i++) {
   const imgCredit = document.createElement("p");
   const figCaption = document.createElement("figcaption");
 
-  const modal = document.getElementsByClassName("modal");
-  const modalImg = document.querySelector(".modalImg");
+  // const modal = document.getElementsByClassName("modal");
+  // const modalImg = document.querySelector(".modalImg");
 
   img.src = `${images[i].localURL}`;
   img.alt = `${images[i].title}` + " Poster";
@@ -143,18 +143,10 @@ for (let i = 0; i < images.length; i++) {
   imgLink.appendChild(title);
   figure.appendChild(figCaption);
 
-  // images[i].onclick = function () {
-  //   modal.style.display = "block";
-  //   modalImg.src = img.src;
-  // };
+}
 
-  // function modalImg(images) {
-  //   const expandImg = document.querySelector(".expandImg");
-  //   expandImg.src = images.src;
-  //   expandImg.parentElement.style.display = "block";
-  // }
-
-  const lightboxImages = document.querySelectorAll('.modal-content img');
+for (let i = 0; i < images.length; i++){
+const modalImages = document.querySelectorAll('.modal-content img');
 
 // dynamically selects all elements inside modal popup
 const modalElement = element =>
@@ -166,12 +158,13 @@ const body = document.querySelector('body');
 document.addEventListener('click', () => {
   body.style.overflow = 'auto';
   modalPopup.style.display = 'none';
+
 });
 
 const modalPopup = document.querySelector('.image-modal-popup');
 
 // loops over each modal content img and adds click event functionality
-lightboxImages.forEach(img => {
+modalImages.forEach(img => {
   img.addEventListener('click', e => {
     // let img = document.querySelectorAll("img");
     // img.src = `${images[i].localURL}`;
@@ -179,9 +172,33 @@ lightboxImages.forEach(img => {
     e.stopPropagation();
     modalPopup.style.display = 'block';
     modalElement('img').src = img.src;
+    modalElement('p').innerText = "Original size: " + img.naturalWidth + "px" + " by " +  img.naturalHeight + "px";
+    // modalElement('img').width = 500;
+
+    if (img.naturalWidth >= 500) {
+      modalElement('img').width = 500;
+    } else {
+      modalElement('img').width = img.naturalWidth;
+    };
+
   });
 });
+
 }
 
 
 
+
+
+
+// My attempts of a modal w/out Google
+  // images[i].onclick = function () {
+  //   modal.style.display = "block";
+  //   modalImg.src = img.src;
+  // };
+
+  // function modalImg(images) {
+  //   const expandImg = document.querySelector(".expandImg");
+  //   expandImg.src = images.src;
+  //   expandImg.parentElement.style.display = "block";
+  // }
