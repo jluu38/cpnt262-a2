@@ -104,7 +104,7 @@ const images = [{
 // all images inside the image modal content class
 
 
-for (let i = 0; i < images.length; i++) {
+for (var i = 0; i < images.length; i++) {
   //constants declared in the order they're nested 
   const gallery = document.querySelector(".grid");
   const figure = document.createElement("figure");
@@ -115,15 +115,9 @@ for (let i = 0; i < images.length; i++) {
   const imgCredit = document.createElement("p");
   const figCaption = document.createElement("figcaption");
 
-  // const modal = document.getElementsByClassName("modal");
-  // const modalImg = document.querySelector(".modalImg");
-
   img.src = `${images[i].localURL}`;
   img.alt = `${images[i].title}` + " Poster";
   img.width = "300";
-
-
-
 
   imgLink.href = `${images[i].imgURL}`;
   title.innerText = `${images[i].title}`;
@@ -143,10 +137,7 @@ for (let i = 0; i < images.length; i++) {
   imgLink.appendChild(title);
   figure.appendChild(figCaption);
 
-}
-
-for (let i = 0; i < images.length; i++){
-const modalImages = document.querySelectorAll('.modal-content img');
+  const modalImages = document.querySelectorAll('.modal-content img');
 
 // dynamically selects all elements inside modal popup
 const modalElement = element =>
@@ -166,14 +157,13 @@ const modalPopup = document.querySelector('.image-modal-popup');
 // loops over each modal content img and adds click event functionality
 modalImages.forEach(img => {
   img.addEventListener('click', e => {
-    // let img = document.querySelectorAll("img");
-    // img.src = `${images[i].localURL}`;
+
     body.style.overflow = 'auto';
     e.stopPropagation();
     modalPopup.style.display = 'block';
     modalElement('img').src = img.src;
+    
     modalElement('p').innerText = "Original size: " + img.naturalWidth + "px" + " x " +  img.naturalHeight + "px";
-    // modalElement('img').width = 500;
 
     if (img.naturalWidth >= 500) {
       modalElement('img').width = 500;
@@ -190,8 +180,7 @@ modalImages.forEach(img => {
 
 
 
-
-// My attempts of a modal w/out Google
+// My attempts of a modal w/out external resources
   // images[i].onclick = function () {
   //   modal.style.display = "block";
   //   modalImg.src = img.src;
