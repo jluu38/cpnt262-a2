@@ -172,7 +172,7 @@ modalImages.forEach(img => {
     e.stopPropagation();
     modalPopup.style.display = 'block';
     modalElement('img').src = img.src;
-    modalElement('p').innerText = "Original size: " + img.naturalWidth + "px" + " by " +  img.naturalHeight + "px";
+    modalElement('p').innerText = "Original size: " + img.naturalWidth + "px" + " x " +  img.naturalHeight + "px";
     // modalElement('img').width = 500;
 
     if (img.naturalWidth >= 500) {
