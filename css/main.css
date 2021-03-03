@@ -194,6 +194,7 @@ h2 {
 }
 
 .image-modal-popup {
+  display: none;
   position: fixed;
   overflow: auto;
   top: 0;
@@ -204,6 +205,11 @@ h2 {
   color: #fff;
   animation: 500ms fadeIn;
   display: none;
+}
+
+.image-modal-popup.reveal {
+  display: block;
+  justify-items: center;
 }
 
 .item {

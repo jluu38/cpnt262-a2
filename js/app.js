@@ -101,9 +101,7 @@ const images = [{
   }
 ];
 
-// all images inside the image modal content class
-
-
+// DOM manipulated gallery output
 for (var i = 0; i < images.length; i++) {
   //constants declared in the order they're nested 
   const gallery = document.querySelector(".grid");
@@ -115,13 +113,16 @@ for (var i = 0; i < images.length; i++) {
   const imgCredit = document.createElement("p");
   const figCaption = document.createElement("figcaption");
 
+  // images
   img.src = `${images[i].localURL}`;
   img.alt = `${images[i].title}` + " Poster";
   img.width = "300";
 
+  // film wikipedia pages linked to titles
   imgLink.href = `${images[i].imgURL}`;
   title.innerText = `${images[i].title}`;
 
+  // credits & figcaption
   imgCreditURL.href = `${images[i].imgCreditUrl}`;
   imgCredit.innerText = `${images[i].imgCredit}`
   imgCreditURL.classList.add("creditURL");
@@ -136,59 +137,45 @@ for (var i = 0; i < images.length; i++) {
   imgCreditURL.appendChild(imgCredit);
   imgLink.appendChild(title);
   figure.appendChild(figCaption);
+}
 
-  const modalImages = document.querySelectorAll('.modal-content img');
-
-// dynamically selects all elements inside modal popup
+// Gallery modal/lightbox
+const modalImages = document.querySelectorAll('.modal-content img');
 const modalElement = element =>
   document.querySelector(`.image-modal-popup ${element}`);
-
-const body = document.querySelector('body');
-
-// closes modal on clicking anywhere and adds overflow back
-document.addEventListener('click', () => {
-  body.style.overflow = 'auto';
-  modalPopup.style.display = 'none';
-
-});
-
 const modalPopup = document.querySelector('.image-modal-popup');
 
-// loops over each modal content img and adds click event functionality
+// closes modal upon any click
+document.addEventListener('click', () => {
+  modalPopup.classList.remove("reveal");
+});
+
 modalImages.forEach(img => {
-  
   img.addEventListener('click', e => {
-
-    body.style.overflow = 'auto';
     e.stopPropagation();
-    modalPopup.style.display = 'block';
+    modalPopup.classList.toggle("reveal");
     modalElement('img').src = img.src;
-    
-    modalElement('p').innerText = "Original size: " + img.naturalWidth + "px" + " x " +  img.naturalHeight + "px";
+    modalElement('p').innerText = "Original size: " + img.naturalWidth + "px" + " x " + img.naturalHeight + "px";
 
+    // if/else used to keep consistency of images in modal (since image sizes greatly vary)
+    // unless images are smaller than 500px, then their original img size is displayed
     if (img.naturalWidth >= 500) {
       modalElement('img').width = 500;
     } else {
       modalElement('img').width = img.naturalWidth;
     };
-
   });
 });
 
-}
+// My attempts at a modal w/out external resources
+// (corresponding html/css were deleted -- this is more so to show where i was logically on the right or wrong track)
+// images[i].onclick = function () {
+//   modal.style.display = "block";
+//   modalImg.src = img.src;
+// };
 
-
-
-
-
-// My attempts of a modal w/out external resources
-  // images[i].onclick = function () {
-  //   modal.style.display = "block";
-  //   modalImg.src = img.src;
-  // };
-
-  // function modalImg(images) {
-  //   const expandImg = document.querySelector(".expandImg");
-  //   expandImg.src = images.src;
-  //   expandImg.parentElement.style.display = "block";
-  // }
+// function modalImg(images) {
+//   const expandImg = document.querySelector(".expandImg");
+//   expandImg.src = images.src;
+//   expandImg.parentElement.style.display = "block";
+// }
