@@ -102,39 +102,40 @@ const images = [{
 ];
 
 // DOM manipulated gallery output
-for (var i = 0; i < images.length; i++) {
+for (let i = 0; i < images.length; i++) {
   //constants declared in the order they're nested 
   const gallery = document.querySelector(".grid");
   const figure = document.createElement("figure");
   const img = document.createElement("img");
-  const imgLink = document.createElement("a");
-  const title = document.createElement("h3");
   const imgCreditURL = document.createElement("a");
   const imgCredit = document.createElement("p");
+  const imgLink = document.createElement("a");
+  const title = document.createElement("h3");
   const figCaption = document.createElement("figcaption");
 
   // images
   img.src = `${images[i].localURL}`;
   img.alt = `${images[i].title}` + " Poster";
-  img.width = "300";
+  img.height = "450";
+
+  // image credits
+  imgCreditURL.href = `${images[i].imgCreditUrl}`;
+  imgCredit.innerText = `${images[i].imgCredit}`
+  imgCreditURL.classList.add("creditURL");
 
   // film wikipedia pages linked to titles
   imgLink.href = `${images[i].imgURL}`;
   title.innerText = `${images[i].title}`;
 
-  // credits & figcaption
-  imgCreditURL.href = `${images[i].imgCreditUrl}`;
-  imgCredit.innerText = `${images[i].imgCredit}`
-  imgCreditURL.classList.add("creditURL");
-
+  //figcaption
   figCaption.innerText = `${images[i].summary}`;
 
   //appended in nested order 
   gallery.appendChild(figure);
   figure.appendChild(img);
-  figure.appendChild(imgLink);
   figure.appendChild(imgCreditURL);
   imgCreditURL.appendChild(imgCredit);
+  figure.appendChild(imgLink);
   imgLink.appendChild(title);
   figure.appendChild(figCaption);
 }
@@ -155,6 +156,7 @@ modalImages.forEach(img => {
     e.stopPropagation();
     modalPopup.classList.toggle("reveal");
     modalElement('img').src = img.src;
+    modalElement("img").alt = img.alt;
     modalElement('p').innerText = "Original size: " + img.naturalWidth + "px" + " x " + img.naturalHeight + "px";
 
     // if/else used to keep consistency of images in modal (since image sizes greatly vary)
