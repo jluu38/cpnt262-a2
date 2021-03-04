@@ -80,7 +80,7 @@ const images = [{
   {
     "id": 2,
     "title": "He Who Gets Slapped",
-    "summary": "A 1924 silent psychological thriller based on a Russian play",
+    "summary": "A 1924 silent psychological thriller based on a Russian play.",
     "width": 503,
     "height": 798,
     "localURL": "images/hewhogetsslapped.jpg",
