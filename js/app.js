@@ -52,8 +52,8 @@ const images = [{
     "height": 1633,
     "localURL": "images/greed.png",
     "imgURL": "https://en.wikipedia.org/wiki/Greed_(1924_film)",
-    "imgCredit": "Wikimedia Commons",
-    "imgCreditUrl": "https://en.wikipedia.org/wiki/Greed_(1924_film)#/media/File:Greed3.jpg"
+    "imgCredit": "University of Oregon Libraries",
+    "imgCreditUrl": "https://expo.uoregon.edu/spotlight/public-domain-day-2020/feature/greed"
   },
   {
     "id": 6,
@@ -120,17 +120,17 @@ for (let i = 0; i < images.length; i++) {
 
   // image credits
   imgCreditURL.href = `${images[i].imgCreditUrl}`;
-  imgCredit.innerText = `${images[i].imgCredit}`
+  imgCredit.innerText = `${images[i].imgCredit}`;
   imgCreditURL.classList.add("creditURL");
 
   // film wikipedia pages linked to titles
   imgLink.href = `${images[i].imgURL}`;
   title.innerText = `${images[i].title}`;
 
-  //figcaption
+  // figcaption
   figCaption.innerText = `${images[i].summary}`;
 
-  //appended in nested order 
+  // appended in nested order 
   gallery.appendChild(figure);
   figure.appendChild(img);
   figure.appendChild(imgCreditURL);
@@ -140,37 +140,41 @@ for (let i = 0; i < images.length; i++) {
   figure.appendChild(figCaption);
 }
 
-// Gallery modal/lightbox
-const modalImages = document.querySelectorAll('.modal-content img');
-const modalElement = element =>
-  document.querySelector(`.image-modal-popup ${element}`);
-const modalPopup = document.querySelector('.image-modal-popup');
+// gallery modal/lightbox
+const modalImages = document.querySelectorAll(".modal-content img");
+const modalPopUp = document.querySelector(".image-modal-popup");
 
-// closes modal upon any click
-document.addEventListener('click', () => {
-  modalPopup.classList.remove("reveal");
-});
+// this function removes the need to declare more constants for modal-specific elements
+function modalElement(element) {
+  return document.querySelector(`.image-modal-popup ${element}`);
+}
 
+// changes made to the modal's child elements when an image is clicked
 modalImages.forEach(img => {
-  img.addEventListener('click', e => {
+  img.addEventListener("click", e => {
     e.stopPropagation();
-    modalPopup.classList.toggle("reveal");
-    modalElement('img').src = img.src;
+    modalPopUp.classList.toggle("reveal");
+    modalElement("img").src = img.src;
     modalElement("img").alt = img.alt;
-    modalElement('p').innerText = "Original size: " + img.naturalWidth + "px" + " x " + img.naturalHeight + "px";
+    modalElement("p").innerText = "Original size: " + img.naturalWidth + "px" + " x " + img.naturalHeight + "px";
 
-    // if/else used to keep consistency of images in modal (since image sizes greatly vary)
-    // unless images are smaller than 500px, then their original img size is displayed
-    if (img.naturalWidth >= 500) {
-      modalElement('img').width = 500;
+    // if/else used to keep consistency of images in modal at 700px since image sizes greatly vary
+    // images smaller than 700px are displayed in their original size (which is why this isn"t done with CSS)
+    if (img.naturalHeight >= 700) {
+      modalElement("img").height = 700;
     } else {
-      modalElement('img').width = img.naturalWidth;
-    };
+      modalElement("img").height = img.naturalHeight;
+    }
   });
 });
 
-// My attempts at a modal w/out external resources
-// (corresponding html/css were deleted -- this is more so to show where i was logically on the right or wrong track)
+// closes modal upon any click
+document.addEventListener("click", () => {
+  modalPopUp.classList.remove("reveal");
+});
+
+// Parts of my attempts at a modal w/out external resources (corresponding html/css were deleted --
+// this is more so to remind myself where i was logically on the right or wrong track)
 // images[i].onclick = function () {
 //   modal.style.display = "block";
 //   modalImg.src = img.src;

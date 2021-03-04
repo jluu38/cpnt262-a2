@@ -147,6 +147,10 @@ figure img {
   box-shadow: 10px 10px rgba(102, 96, 92, 0.5);
 }
 
+figure img:hover {
+ cursor: pointer;
+}
+
 figure a {
   color: #211e20;
   font-family: monospace;
@@ -164,7 +168,7 @@ figure a {
 h3 {
   margin: 0;
   font-size: 2rem;
-  text-decoration: underline 2px;
+  text-decoration: 2px underline;
 }
 
 h3:hover {
